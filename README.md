@@ -71,3 +71,34 @@ export default defineConfig([
   },
 ])
 ```
+
+## Demo Output
+
+Running locally:
+
+    $ npm run dev
+    VITE v8.0.2  ready in 181 ms
+    Local:   http://localhost:5173/
+
+Open http://localhost:5173 in browser:
+
+    Step 1: Connect — click "Use Mock Wallet (Testing)"
+    Step 2: Addresses — see BIP-44/49/84 addresses displayed
+    Step 3: Sign — enter message, select key, click "Mock Sign"
+    Result: Signature displayed ✅
+
+## Connect with Real Shell Device
+
+1. On Shell: Watch-only Wallet -> Connect -> show QR
+2. In dApp: click "Scan Shell QR Code"
+3. Addresses appear for all derivation paths
+4. Enter message -> Generate QR -> Shell scans -> returns signature
+
+## Derivation Paths Supported
+
+| BIP | Type | Path |
+|-----|------|------|
+| BIP-44 | Ethereum | m/44'/60'/0'/0/0 |
+| BIP-44 | Bitcoin Legacy | m/44'/0'/0'/0/0 |
+| BIP-49 | Nested SegWit | m/49'/0'/0'/0/0 |
+| BIP-84 | Native SegWit | m/84'/0'/0'/0/0 |
