@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { AnimatedQRScanner } from '@keystonehq/animated-qr'
 import { CryptoAccount, CryptoHDKey } from '@keystonehq/bc-ur-registry'
 import { generateAddressFromXpub } from '@keystonehq/bc-ur-registry-eth'
+import { deriveBtcAddress } from '../utils/btcDerivation'
 import { type WalletState, type DerivedAddress } from '../types'
 
 interface Props {
@@ -38,11 +39,11 @@ function parseURToWallet(ur: { type: string; cbor: string }): WalletState {
         const address = generateAddressFromXpub(xpub, '0')
         addresses.push({ path, type: 'ETH', address, publicKey: pubkey })
       } else if (path.startsWith("44'/0'")) {
-        addresses.push({ path, type: 'BTC-Legacy', address: xpub.slice(0, 34), publicKey: pubkey })
+        addresses.push({ path, type: 'BTC-Legacy', address: deriveBtcAddress(xpub, 'legacy'), publicKey: pubkey })
       } else if (path.startsWith("49'/0'")) {
-        addresses.push({ path, type: 'BTC-NestedSegWit', address: xpub.slice(0, 34), publicKey: pubkey })
+        addresses.push({ path, type: 'BTC-NestedSegWit', address: deriveBtcAddress(xpub, 'nested-segwit'), publicKey: pubkey })
       } else if (path.startsWith("84'/0'")) {
-        addresses.push({ path, type: 'BTC-NativeSegWit', address: xpub.slice(0, 34), publicKey: pubkey })
+        addresses.push({ path, type: 'BTC-NativeSegWit', address: deriveBtcAddress(xpub, 'native-segwit'), publicKey: pubkey })
       }
     }
   } else if (ur.type === 'crypto-hdkey') {

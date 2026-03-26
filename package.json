@@ -12,6 +12,8 @@
   "dependencies": {
     "@keystonehq/animated-qr": "^0.10.0",
     "@keystonehq/bc-ur-registry-eth": "^0.22.1",
+    "@noble/secp256k1": "^3.0.0",
+    "@scure/bip32": "^2.0.1",
     "bitcoinjs-lib": "^7.0.1",
     "ethers": "^6.16.0",
     "react": "^19.2.4",
