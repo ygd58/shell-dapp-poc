@@ -20,12 +20,13 @@ const MOCK_WALLET: WalletState = {
 }
 
 function parseURToWallet(ur: { type: string; cbor: string }): WalletState {
-  const cbor = Buffer.from(ur.cbor, 'hex')
+  const cborHex = ur.cbor
+  const cbor = new Uint8Array((cborHex.match(/.{1,2}/g) ?? []).map((b: string) => parseInt(b, 16)))
   const addresses: DerivedAddress[] = []
   let masterFingerprint = 'unknown'
 
   if (ur.type === 'crypto-account') {
-    const account = CryptoAccount.fromCBOR(cbor)
+    const account = CryptoAccount.fromCBOR(cbor as any)
     masterFingerprint = account.getMasterFingerprint().toString('hex')
 
     for (const descriptor of account.getOutputDescriptors()) {
@@ -47,7 +48,7 @@ function parseURToWallet(ur: { type: string; cbor: string }): WalletState {
       }
     }
   } else if (ur.type === 'crypto-hdkey') {
-    const hdKey = CryptoHDKey.fromCBOR(cbor)
+    const hdKey = CryptoHDKey.fromCBOR(cbor as any)
     const origin = hdKey.getOrigin()
     const path = origin ? 'm/' + origin.getPath() : ''
     const xpub = hdKey.getBip32Key()

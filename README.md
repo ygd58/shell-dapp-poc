@@ -1,3 +1,14 @@
+
+## Quick Start
+
+    git clone https://github.com/ygd58/shell-dapp-poc
+    cd shell-dapp-poc
+    npm install
+    npm run dev
+
+Then open http://localhost:5173 in your browser.
+Requires Node.js v20+: nvm install 20 && nvm use 20
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
