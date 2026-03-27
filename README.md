@@ -1,3 +1,8 @@
+## Prerequisites
+
+- Node.js v20+ (required)
+- Install: nvm install 20 && nvm use 20
+
 
 ## Quick Start
 
